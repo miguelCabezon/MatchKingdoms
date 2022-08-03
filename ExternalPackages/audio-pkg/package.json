@@ -1,0 +1,19 @@
+{
+  "name": "es.jacksparrot.audio",
+  "version": "1.0.0",
+  "displayName": "jacksparrot Audio",
+  "description": "Utility to play music and sfx in your game",
+  "unity": "2018.1",
+  "unityRelease": "0f1",
+  "dependencies": {
+    "com.unity.addressables": "1.3.8"
+  },
+  "keywords": [
+    "audio"
+  ],
+  "author": {
+    "name": "Francisco Ruiz",
+    "email": "franciscoruizpons@gmail.com",
+    "url": "https://github.com/JackSParrot/audio-pkg"
+  }
+}

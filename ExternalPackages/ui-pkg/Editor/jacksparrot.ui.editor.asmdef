@@ -1,0 +1,22 @@
+{
+    "name": "jacksparrot.ui.editor",
+    "references": [
+        "JackSParrotUtils.Runtime",
+        "JackSParrotAudio.Runtime",
+        "jacksparrot.ui.runtime",
+        "Unity.Addressables",
+        "Unity.TextMeshPro",
+        "Unity.ResourceManager"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

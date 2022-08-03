@@ -1,0 +1,17 @@
+{
+  "name": "es.jacksparrot.dotween",
+  "version": "1.0.0",
+  "displayName": "DOTween plugin as a package",
+  "description": "This is the same offered in the store, but as a package",
+  "unity": "2018.1",
+  "unityRelease": "0f1",
+  "dependencies": {
+ },
+ "keywords": [
+  ],
+  "author": {
+    "name": "Francisco Ruiz",
+    "email": "franciscoruizpons@gmail.com",
+    "url": "https://github.com/JackSParrot/dotween-pkg"
+  } 
+}

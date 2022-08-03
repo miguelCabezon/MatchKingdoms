@@ -1,0 +1,16 @@
+{
+    "name": "JackSParrotAudio.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d16e1f00cd6c5114a980183cf9421e7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
