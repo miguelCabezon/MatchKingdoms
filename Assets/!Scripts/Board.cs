@@ -42,7 +42,8 @@ public sealed class Board : MonoBehaviour
 	#region Audio
 	[SerializeField] private AudioClip _matchSound;
 	[SerializeField] private AudioClip _endMatchSound;
-	[SerializeField] private AudioSource audioSource;
+	[SerializeField] private AudioClip _winSound;
+	[SerializeField] private AudioSource _audioSource;
 	#endregion
 
 	[SerializeField] private float _tweenDuration;
@@ -285,7 +286,7 @@ public sealed class Board : MonoBehaviour
 							   .SetEase(Ease.InBack));
 			}
 
-			audioSource.PlayOneShot(_matchSound);
+			_audioSource.PlayOneShot(_matchSound);
 
 			await deflateSequence.Play()
 								 .AsyncWaitForCompletion();
@@ -311,7 +312,7 @@ public sealed class Board : MonoBehaviour
 			match = null;
 		}
 
-		if (didMatch) audioSource.PlayOneShot(_endMatchSound);
+		if (didMatch) _audioSource.PlayOneShot(_endMatchSound);
 
 		_isMatching = false;
 
@@ -346,6 +347,8 @@ public sealed class Board : MonoBehaviour
 
 		inflateSequence.Join(_winScreen.transform.DOScale(Vector3.one, _tweenDuration)
 					   .SetEase(Ease.InBounce));
+
+		_audioSource.PlayOneShot(_winSound);
 
 		await inflateSequence.Play().AsyncWaitForCompletion();
 	}
