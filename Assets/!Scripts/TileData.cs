@@ -4,9 +4,9 @@ public readonly struct TileData
 	public readonly int X;
 	public readonly int Y;
 
-	public readonly int TypeId;
+	public readonly string TypeId;
 
-	public TileData(int x, int y, int typeId)
+	public TileData(int x, int y, string typeId)
 	{
 		X = x;
 		Y = y;

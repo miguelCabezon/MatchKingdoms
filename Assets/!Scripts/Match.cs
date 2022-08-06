@@ -3,7 +3,7 @@ using System;
 
 public sealed class Match
 {
-	public readonly int TypeId;
+	public readonly string TypeId;
 
 	public readonly int Score;
 

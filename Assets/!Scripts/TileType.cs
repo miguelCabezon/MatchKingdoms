@@ -4,7 +4,7 @@
 [CreateAssetMenu(menuName = "Match 3 / Tile Type")]
 public sealed class TileType : ScriptableObject
 {
-	public int Id;
+	public string Id;
 
 	public int Value;
 
