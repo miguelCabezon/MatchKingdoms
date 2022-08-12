@@ -918,7 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2987,7 +2987,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -45.916557, w: 0}
+  m_margin: {x: -48.408985, y: 0, z: -99.60655, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6482,26 +6482,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669617225}
     m_Modifications:
-    - target: {fileID: 64558284726829767, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_Interactable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 64558284726829767, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64558284726829767, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 64558284726829767, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 669617224}
-    - target: {fileID: 64558284726829767, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 332963944295523777, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6645,22 +6625,6 @@ PrefabInstance:
     - target: {fileID: 3482549940677443178, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645065578725506374, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645065578725506374, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645065578725506374, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645065578725506374, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5157500969961995925, guid: 12fd4cbf4cce2a44191049e0223d9a4b, type: 3}
       propertyPath: m_AnchorMax.y

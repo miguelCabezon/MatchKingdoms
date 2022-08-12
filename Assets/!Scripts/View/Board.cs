@@ -11,6 +11,7 @@ using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEngine.Rendering.Universal;
 
 public sealed class Board : MonoBehaviour
 {
@@ -188,8 +189,9 @@ public sealed class Board : MonoBehaviour
 		}
 	}
 
-	private async void Select(Tile tile)
+	public async void Select(Tile tile)
 	{
+
 		if (_isSwapping || _isMatching || _isShuffling) return;
 
 		if (!_selection.Contains(tile))
