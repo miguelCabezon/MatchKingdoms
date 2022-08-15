@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class Row : MonoBehaviour
+public class Row : MonoBehaviour // Row Model
 {
 		public Tile[] Tiles;
 }

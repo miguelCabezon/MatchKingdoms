@@ -1,5 +1,5 @@
 ﻿
-public sealed class Move
+public class Move
 {
 	public readonly int X1;
 	public readonly int Y1;

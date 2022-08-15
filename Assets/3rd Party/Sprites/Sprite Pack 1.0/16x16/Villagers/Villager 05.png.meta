@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1822,13 +1822,13 @@ TextureImporter:
       Villager 05_75: 141984721
       Villager 05_24: 757759967
       Villager 05_13: -1134007539
+      Villager 05_18: -1826882771
       Villager 05_25: 811746411
       Villager 05_37: 183937019
       Villager 05_68: 1876483311
       Villager 05_20: 1016289358
       Villager 05_56: 1894587725
       Villager 05_9: -2025250125
-      Villager 05_72: 1254241091
       Villager 05_7: 1036542762
       Villager 05_3: 1092188123
       Villager 05_31: -515981915
@@ -1896,8 +1896,8 @@ TextureImporter:
       Villager 05_43: -802458194
       Villager 05_10: 38726856
       Villager 05_59: -1779425237
-      Villager 05_18: -1826882771
       Villager 05_71: -489261851
+      Villager 05_72: 1254241091
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

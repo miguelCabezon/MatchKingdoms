@@ -2,18 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 using TMPro;
-using System.Runtime.CompilerServices;
-using UnityEngine.Rendering.Universal;
+using Unity.VisualScripting;
 
-public sealed class Board : MonoBehaviour
+public class Board : MonoBehaviour
 {
 	#region Victory Conditions
 	[SerializeField] private int _scoreObjective = 200;
@@ -24,16 +20,28 @@ public sealed class Board : MonoBehaviour
 	[SerializeField] private GameObject _gameOverScreen;
 	[SerializeField] private GameObject _winScreen;
 
-	// public enum State
-	// {
-	// 	WIN,
-	// 	LOSE,
-	// 	NONE
-	// }
-
-	// private State _actualState = State.NONE;
+	private State _actualState = State.GAME;
 
 	
+	#endregion
+
+	#region Resources
+
+	// GATHERED
+	private int _woodAmountGathered = 0;
+	private int _foodAmountGathered = 0;
+	private int _coinAmountGathered = 0;
+	[SerializeField] private TMP_Text _woodAmountGatheredText;
+	[SerializeField] private TMP_Text _foodAmountGatheredText;
+	[SerializeField] private TMP_Text _coinAmountGatheredText;
+
+	// TO TOWN (RECOLECTED?)
+	private int _woodAmountToTown = 0;
+	private int _foodAmountToTown = 0;
+	private int _coinAmountToTown = 0;
+	[SerializeField] private TMP_Text _woodAmountToTownText;
+	[SerializeField] private TMP_Text _foodAmountToTownText;
+	[SerializeField] private TMP_Text _coinAmountToTownText;
 	#endregion
 
 
@@ -44,6 +52,7 @@ public sealed class Board : MonoBehaviour
 	[SerializeField] private AudioClip _matchSound;
 	[SerializeField] private AudioClip _endMatchSound;
 	[SerializeField] private AudioClip _winSound;
+	[SerializeField] private AudioClip _secretSound;
 	[SerializeField] private AudioSource _audioSource;
 	#endregion
 
@@ -61,6 +70,10 @@ public sealed class Board : MonoBehaviour
 	#endregion
 
 	public event Action<TileType, int> OnMatchAction;
+	public event Action OnWinAction;
+	public event Action OnLoseAction;
+
+	public BoardController boardController = new BoardController();
 
 	private TileData[,] Matrix // Matrix filled with tile info
 	{
@@ -83,6 +96,10 @@ public sealed class Board : MonoBehaviour
 	{
 		_movesRemaining = _movesLimit;
 		UpdateMovementUI();
+
+		OnMatchAction += (type, count) => OnMatch(type, count);
+		OnWinAction += Win;
+		OnLoseAction += GameOver;
 	}
 		
 
@@ -96,15 +113,12 @@ public sealed class Board : MonoBehaviour
 			
 		}
 	}
-
-	private void OnEnable() 
-	{
-		OnMatchAction += (type, count) => OnMatch(type, count);
-	}
-
-	private void OnDisable() 
+	
+	private void OnDestroy()
 	{
 		OnMatchAction -= (type, count) => OnMatch(type, count);
+		OnWinAction -= Win;
+		OnLoseAction -= GameOver;
 	}
 
 	
@@ -131,17 +145,18 @@ public sealed class Board : MonoBehaviour
 
 	public void OnMatch(TileType type, int count)
 	{
-		UpdateMovementUI();
 		UpdateScoreUI(type, count);
+		UpdateMovementUI();
+		
 	}
 
 	private void UpdateMovementUI()
 	{
 		_movementCounterText.SetText($"{_movesRemaining}");
 
-		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective)
+		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == State.GAME)
 		{
-			GameOver();
+			OnLoseAction?.Invoke();
 		}
 	}
 
@@ -149,9 +164,25 @@ public sealed class Board : MonoBehaviour
 	{
 		var newScore = ScoreCounter.Instance.Score += count * type.Value;
 
-		if (newScore >= _scoreObjective)
+		switch (type.Id)
 		{
-			Win();
+			case "wood":
+				_woodAmountGathered += count;
+				_woodAmountGatheredText.text = _woodAmountGathered.ToString();
+				break;
+			case "food":
+				_foodAmountGathered += count;
+				_foodAmountGatheredText.text = _foodAmountGathered.ToString();
+				break;
+			case "coin":
+				_coinAmountGathered += count;
+				_coinAmountGatheredText.text = _coinAmountGathered.ToString();
+				break;
+		}
+
+		if (newScore >= _scoreObjective && _actualState == State.GAME)
+		{
+			OnWinAction?.Invoke();
 		}
 	}
 
@@ -219,6 +250,8 @@ public sealed class Board : MonoBehaviour
 		{
 			if (!await TryMatchAsync()) await SwapAsync(_selection[0], _selection[1]);
 		}
+
+		_audioSource.PlayOneShot(_endMatchSound);
 
 		_selection.Clear();
 	}
@@ -314,8 +347,6 @@ public sealed class Board : MonoBehaviour
 			match = null;
 		}
 
-		if (didMatch) _audioSource.PlayOneShot(_endMatchSound);
-
 		_isMatching = false;
 
 		return didMatch;
@@ -334,16 +365,21 @@ public sealed class Board : MonoBehaviour
 
 	private async void GameOver()
 	{
+		_actualState = State.LOSE;
+
 		var inflateSequence = DOTween.Sequence();
 
 		inflateSequence.Join(_gameOverScreen.transform.DOScale(Vector3.one, _tweenDuration)
 					   .SetEase(Ease.InBounce));
+
+		_audioSource.PlayOneShot(_secretSound);
 
 		await inflateSequence.Play().AsyncWaitForCompletion();
 	}
 
 	private async void Win()
 	{
+		_actualState = State.WIN;
 
 		var inflateSequence = DOTween.Sequence();
 
