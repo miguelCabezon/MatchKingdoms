@@ -42,6 +42,15 @@ public class Board : MonoBehaviour
 	[SerializeField] private TMP_Text _woodAmountToTownText;
 	[SerializeField] private TMP_Text _foodAmountToTownText;
 	[SerializeField] private TMP_Text _coinAmountToTownText;
+
+	// VILLAGER
+	private int _villagerAmount = 100;
+	[SerializeField] private TMP_Text _villagerAmountText;
+
+	// FINAL RESOURCES
+	[SerializeField] private TMP_Text _finalWoodText;
+	[SerializeField] private TMP_Text _finalFoodText;
+	[SerializeField] private TMP_Text _finalCoinText;
 	#endregion
 
 
@@ -147,7 +156,6 @@ public class Board : MonoBehaviour
 	{
 		UpdateScoreUI(type, count);
 		UpdateMovementUI();
-		
 	}
 
 	private void UpdateMovementUI()
@@ -167,16 +175,28 @@ public class Board : MonoBehaviour
 		switch (type.Id)
 		{
 			case "wood":
+				Debug.Log($"Has recolectado x{count} {type.Id}");
 				_woodAmountGathered += count;
 				_woodAmountGatheredText.text = _woodAmountGathered.ToString();
 				break;
 			case "food":
+				Debug.Log($"Has recolectado x{count} {type.Id}");
 				_foodAmountGathered += count;
 				_foodAmountGatheredText.text = _foodAmountGathered.ToString();
 				break;
 			case "coin":
+				Debug.Log($"Has recolectado x{count} {type.Id}");
 				_coinAmountGathered += count;
 				_coinAmountGatheredText.text = _coinAmountGathered.ToString();
+				break;
+			case "villager_05":
+				Debug.Log($"Has recolectado x{count} {type.Id}");
+				RecollectResources();
+				_villagerAmount -= count;
+				_villagerAmountText.text = _villagerAmount.ToString();
+				break;
+			default:
+				Debug.Log($"Has recolectado x{count} {type.Id}");
 				break;
 		}
 
@@ -184,6 +204,35 @@ public class Board : MonoBehaviour
 		{
 			OnWinAction?.Invoke();
 		}
+	}
+
+	private void RecollectResources()
+	{
+		// Pasar los resources de Gathered a To Town
+			// Reiniciar los Gathered
+			// Solo hacer si hay villagers
+		
+		if (_villagerAmount <= 0) return;
+
+		_woodAmountToTown += _woodAmountGathered;
+		_woodAmountGathered = 0;
+
+		_foodAmountToTown += _foodAmountGathered;
+		_foodAmountGathered = 0;
+
+		_coinAmountToTown += _coinAmountGathered;
+		_coinAmountGathered = 0;
+
+
+		// Cambiar la UI
+		_woodAmountToTownText.text = _woodAmountToTown.ToString();
+		_woodAmountGatheredText.text = _woodAmountGathered.ToString();
+		
+		_foodAmountToTownText.text = _foodAmountToTown.ToString();
+		_foodAmountGatheredText.text = _foodAmountGathered.ToString();
+
+		_coinAmountToTownText.text = _coinAmountToTown.ToString();
+		_coinAmountGatheredText.text = _coinAmountGathered.ToString();
 	}
 
 	private IEnumerator EnsureNoStartingMatches()
@@ -380,6 +429,10 @@ public class Board : MonoBehaviour
 	private async void Win()
 	{
 		_actualState = State.WIN;
+
+		_finalWoodText.text = _woodAmountToTown.ToString();
+		_finalFoodText.text = _foodAmountToTown.ToString();
+		_finalCoinText.text = _coinAmountToTown.ToString();
 
 		var inflateSequence = DOTween.Sequence();
 
