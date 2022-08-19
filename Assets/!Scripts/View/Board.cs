@@ -189,7 +189,7 @@ public class Board : MonoBehaviour
 				_coinAmountGathered += count;
 				_coinAmountGatheredText.text = _coinAmountGathered.ToString();
 				break;
-			case "villager_05":
+			case "villager":
 				Debug.Log($"Has recolectado x{count} {type.Id}");
 				RecollectResources();
 				_villagerAmount -= count;

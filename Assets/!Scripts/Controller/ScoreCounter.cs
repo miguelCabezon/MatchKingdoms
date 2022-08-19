@@ -41,7 +41,7 @@ public sealed class ScoreCounter : MonoBehaviour
 
             _score = value;
 
-            _scoreText.SetText($"{_score}");
+            _scoreText.SetText($"{_score}/200");
         }
     }
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff71e311baf2cc4d8223d1598d72b45, type: 3}
   m_Name: Villager_05
   m_EditorClassIdentifier: 
-  Id: villager_05
+  Id: villager
   Value: 1
-  Sprite: {fileID: 1302433982, guid: 93309061ab17b69418a5de87a1578dbd, type: 3}
+  Sprite: {fileID: 21300000, guid: 205c46734b16e6e4f8cd537b92ec1b5d, type: 3}
