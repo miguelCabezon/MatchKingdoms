@@ -1,5 +1,5 @@
 ﻿
-public readonly struct TileData
+public readonly struct TileData //& Data Model
 {
 	public readonly int X;
 	public readonly int Y;

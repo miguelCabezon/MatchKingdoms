@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 
-public sealed class Tile : MonoBehaviour
+public sealed class Tile : MonoBehaviour //& Tile Model
 {
 	public int X;
 	public int Y;

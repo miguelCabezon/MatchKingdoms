@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 using TMPro;
 using Unity.VisualScripting;
 
-public class Board : MonoBehaviour
+//! DO NO DELETE UNTIL MVC COMPLETION
+public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, view, and controller)  
 {
 	#region Victory Conditions
 	[SerializeField] private int _scoreObjective = 200;
@@ -21,8 +22,6 @@ public class Board : MonoBehaviour
 	[SerializeField] private GameObject _winScreen;
 
 	private State _actualState = State.GAME;
-
-	
 	#endregion
 
 	#region Resources
@@ -84,7 +83,7 @@ public class Board : MonoBehaviour
 
 	public BoardController boardController = new BoardController();
 
-	private TileData[,] Matrix // Matrix filled with tile info
+	private TileData[,] Matrix // Matrix filled with tile info //* CONTROLLER/MODEL
 	{
 		get
 		{
@@ -132,7 +131,7 @@ public class Board : MonoBehaviour
 
 	
 
-	private void BuildBoard() 
+	private void BuildBoard() //* VIEW
 	{
 		for (var y = 0; y < _rows.Length; y++)
 		{
@@ -152,23 +151,23 @@ public class Board : MonoBehaviour
 		if (_ensureNoStartingMatches) StartCoroutine(EnsureNoStartingMatches());
 	}
 
-	public void OnMatch(TileType type, int count)
+	public void OnMatch(TileType type, int count) //* CONTROLLER
 	{
 		UpdateScoreUI(type, count);
 		UpdateMovementUI();
 	}
 
-	private void UpdateMovementUI()
+	private void UpdateMovementUI() //* VIEW
 	{
 		_movementCounterText.SetText($"{_movesRemaining}");
 
-		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == State.GAME)
+		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == State.GAME) 
 		{
 			OnLoseAction?.Invoke();
 		}
 	}
 
-	private void UpdateScoreUI(TileType type, int count)
+	private void UpdateScoreUI(TileType type, int count) //* VIEW/CONTROLLER
 	{
 		var newScore = ScoreCounter.Instance.Score += count * type.Value;
 
@@ -206,14 +205,15 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	private void RecollectResources()
+	private void RecollectResources() //* CONTROLLER/VIEW
 	{
-		// Pasar los resources de Gathered a To Town
+		// Tranfer resources from Gathered to To Town
 			// Reiniciar los Gathered
 			// Solo hacer si hay villagers
 		
 		if (_villagerAmount <= 0) return;
 
+		// Transfer resources
 		_woodAmountToTown += _woodAmountGathered;
 		_woodAmountGathered = 0;
 
@@ -224,7 +224,7 @@ public class Board : MonoBehaviour
 		_coinAmountGathered = 0;
 
 
-		// Cambiar la UI
+		// Change UI
 		_woodAmountToTownText.text = _woodAmountToTown.ToString();
 		_woodAmountGatheredText.text = _woodAmountGathered.ToString();
 		
@@ -235,7 +235,7 @@ public class Board : MonoBehaviour
 		_coinAmountGatheredText.text = _coinAmountGathered.ToString();
 	}
 
-	private IEnumerator EnsureNoStartingMatches()
+	private IEnumerator EnsureNoStartingMatches() //* CONTROLLER
 	{
 		var wait = new WaitForEndOfFrame();
 
@@ -245,9 +245,9 @@ public class Board : MonoBehaviour
 			yield return wait;
 		}
 	}
-	private Tile GetTile(int x, int y) => _rows[y].Tiles[x];
+	private Tile GetTile(int x, int y) => _rows[y].Tiles[x]; //* CONTROLLER/MODEL
 
-	private Tile[] GetTiles(IList<TileData> tileData)
+	private Tile[] GetTiles(IList<TileData> tileData) //* CONTROLLER
 	{
 		var length = tileData.Count;
 
@@ -258,7 +258,7 @@ public class Board : MonoBehaviour
 		return tiles;
 	}
 
-	private void AutoMatch()
+	private void AutoMatch() //* CONTROLLER
 	{
 		var bestMove = TileMatrixUtility.FindBestMove(Matrix);
 
@@ -269,7 +269,7 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	public async void Select(Tile tile)
+	public async void Select(Tile tile) //* CONTROLLER
 	{
 
 		if (_isSwapping || _isMatching || _isShuffling) return;
@@ -305,7 +305,7 @@ public class Board : MonoBehaviour
 		_selection.Clear();
 	}
 
-	private async Task SwapAsync(Tile tile1, Tile tile2)
+	private async Task SwapAsync(Tile tile1, Tile tile2) //* CONTROLLER
 	{
 		_isSwapping = true;
 
@@ -348,7 +348,7 @@ public class Board : MonoBehaviour
 		_isSwapping = false;
 	}
 
-	private async Task<bool> TryMatchAsync() // Intentar con Corutinas
+	private async Task<bool> TryMatchAsync() // Intentar con Corutinas //* CONTROLLER
 	{
 		var didMatch = false;
 
@@ -401,7 +401,7 @@ public class Board : MonoBehaviour
 		return didMatch;
 	}
 
-	private void Shuffle() // Shuffle all tiles
+	private void Shuffle() // Shuffle all tiles //* CONTROLLER
 	{
 		_isShuffling = true;
 
@@ -412,7 +412,7 @@ public class Board : MonoBehaviour
 		_isShuffling = false;
 	}
 
-	private async void GameOver()
+	private async void GameOver() //* CONTROLLER/VIEW
 	{
 		_actualState = State.LOSE;
 
@@ -426,7 +426,7 @@ public class Board : MonoBehaviour
 		await inflateSequence.Play().AsyncWaitForCompletion();
 	}
 
-	private async void Win()
+	private async void Win() //* CONTROLLER/VIEW
 	{
 		_actualState = State.WIN;
 

@@ -1,4 +1,4 @@
-public enum State
+public enum State //& Game States
 {
     GAME,
     WIN,

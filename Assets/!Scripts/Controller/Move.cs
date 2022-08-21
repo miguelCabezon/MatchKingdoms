@@ -1,5 +1,5 @@
 ﻿
-public class Move
+public class Move //? No idea how to define this
 {
 	public readonly int X1;
 	public readonly int Y1;

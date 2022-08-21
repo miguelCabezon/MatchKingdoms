@@ -1,12 +1,18 @@
 using UnityEngine;
 using TMPro;
 
-public class BoardView : MonoBehaviour
+//? THIS SHOULD BE THE ONLY VIEW IN GAME (?)
+public class BoardView : MonoBehaviour //& Board View
 {
+    [SerializeField] private int _scoreObjective = 200;
+	[SerializeField] private int _movesLimit = 10;
     [SerializeField]
     private EventBus _scoreUpdateEventBus;
     [SerializeField]
     private EventBus _movementPerformedEventBus;
+    [SerializeField] private TMP_Text _movementCounterText;
+    [SerializeField] private GameObject _gameOverScreen;
+	[SerializeField] private GameObject _winScreen;
     [SerializeField]
     private TMP_Text _scoreText = null;
     [SerializeField]
@@ -17,12 +23,19 @@ public class BoardView : MonoBehaviour
     {
         _scoreText.text = "0";
 
-        // _scoreUpdateEventBus.Event += ScoreUpdate;
+        
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        // _scoreUpdateEventBus.Event += ScoreUpdate;
+        _movementPerformedEventBus.Event += MovementUpdate;
+    }
+
+    private void OnDisable()
     {
         // _scoreUpdateEventBus.Event -= ScoreUpdate;
+        _movementPerformedEventBus.Event -= MovementUpdate;
     }
 
     private void ScoreUpdate(int scoreToAdd)
@@ -32,6 +45,6 @@ public class BoardView : MonoBehaviour
 
     private void MovementUpdate()
     {
-
+        // _movementCounterText.SetText($"{_movesRemaining}");
     }
 }

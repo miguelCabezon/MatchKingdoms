@@ -6,6 +6,17 @@ public class BoardController : MonoBehaviour
 {
     private BoardModel model = new BoardModel();
     private bool _isShuffling = false;
+
+    // private void UpdateMovementUI()
+	// {
+	// 	_movementCounterText.SetText($"{_movesRemaining}");
+
+	// 	if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == State.GAME)
+	// 	{
+	// 		OnLoseAction?.Invoke();
+	// 	}
+	// }
+
     // Start is called before the first frame update
     void Start()
     {

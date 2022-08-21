@@ -1016,7 +1016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0010681152, y: 64.92383}
+  m_AnchoredPosition: {x: -0.0010986328, y: 64.92383}
   m_SizeDelta: {x: -184.79, y: -129.8477}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &211038620
@@ -2785,8 +2785,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d9a39184a136345960227f38dbcce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreObjective: 200
+  _movesLimit: 10
   _scoreUpdateEventBus: {fileID: 11400000, guid: 63308a11805cada4989ae61c35fc6523, type: 2}
   _movementPerformedEventBus: {fileID: 0}
+  _movementCounterText: {fileID: 0}
+  _gameOverScreen: {fileID: 0}
+  _winScreen: {fileID: 0}
   _scoreText: {fileID: 890760438}
   _movement: {fileID: 0}
 --- !u!1 &738772736

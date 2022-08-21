@@ -2,7 +2,7 @@
 
 
 [CreateAssetMenu(menuName = "Match 3 / Tile Type")]
-public sealed class TileType : ScriptableObject
+public sealed class TileType : ScriptableObject //& Creation of New Tiles
 {
 	public string Id;
 

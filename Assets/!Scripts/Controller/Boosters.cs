@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Boosters : MonoBehaviour
+public sealed class Boosters : MonoBehaviour //! Old booster Class
 {
     public enum Direction
     {
