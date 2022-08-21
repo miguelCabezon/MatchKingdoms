@@ -4,4 +4,8 @@ public enum State //& Game States
     WIN,
     LOSE,
     NONE
+    /*
+    * ADD GAMEMATCH (MAYBE ONE FOR EACH MATCH)
+    * ADD GAME HUB
+    */
 }
