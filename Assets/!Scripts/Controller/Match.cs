@@ -1,5 +1,6 @@
 ﻿
 using System;
+using MVC.Model;
 
 public sealed class Match
 {

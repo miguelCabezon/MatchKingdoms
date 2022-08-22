@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class Row : MonoBehaviour //& Row Model
+namespace MVC.Model
 {
-		public Tile[] Tiles;
+    public class Row : MonoBehaviour //& Row Model
+    {
+        public Tile[] Tiles;
+    }
 }
-

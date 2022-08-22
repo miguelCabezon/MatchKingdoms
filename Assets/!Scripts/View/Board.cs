@@ -8,6 +8,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
 using Unity.VisualScripting;
+using MVC.Model;
+using MVC.Controller;
+using MVC.View;
 
 //! DO NO DELETE UNTIL MVC COMPLETION
 public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, view, and controller)  
@@ -21,7 +24,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 	[SerializeField] private GameObject _gameOverScreen;
 	[SerializeField] private GameObject _winScreen;
 
-	private State _actualState = State.GAME;
+	private GameState _actualState = GameState.GAME;
 	#endregion
 
 	#region Resources
@@ -69,7 +72,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 	[SerializeField] private bool _ensureNoStartingMatches;
 
 	//TODO: This selection now works with two clicks but should work with drag.
-	private readonly List<Tile> _selection = new List<Tile>();
+	private readonly List<TileView> _selection = new List<TileView>();
 
 	#region Inner States
 	private bool _isSwapping;
@@ -83,14 +86,14 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 
 	public BoardController boardController = new BoardController();
 
-	private TileData[,] Matrix // Matrix filled with tile info //* CONTROLLER/MODEL
+	private TileModel[,] Matrix // Matrix filled with tile info //* CONTROLLER/MODEL
 	{
 		get
 		{
 			var width = _rows.Max(row => row.Tiles.Length);
 			var height = _rows.Length;
 
-			var data = new TileData[width, height];
+			var data = new TileModel[width, height];
 
 			for (var y = 0; y < height; y++)
 				for (var x = 0; x < width; x++)
@@ -161,7 +164,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 	{
 		_movementCounterText.SetText($"{_movesRemaining}");
 
-		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == State.GAME) 
+		if (_movesRemaining == 0 && ScoreCounter.Instance.Score < _scoreObjective && _actualState == GameState.GAME) 
 		{
 			OnLoseAction?.Invoke();
 		}
@@ -199,7 +202,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 				break;
 		}
 
-		if (newScore >= _scoreObjective && _actualState == State.GAME)
+		if (newScore >= _scoreObjective && _actualState == GameState.GAME)
 		{
 			OnWinAction?.Invoke();
 		}
@@ -245,13 +248,13 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 			yield return wait;
 		}
 	}
-	private Tile GetTile(int x, int y) => _rows[y].Tiles[x]; //* CONTROLLER/MODEL
+	private TileView GetTile(int x, int y) => _rows[y].Tiles[x]; //* CONTROLLER/MODEL
 
-	private Tile[] GetTiles(IList<TileData> tileData) //* CONTROLLER
+	private TileView[] GetTiles(IList<TileModel> tileData) //* CONTROLLER
 	{
 		var length = tileData.Count;
 
-		var tiles = new Tile[length];
+		var tiles = new TileView[length];
 
 		for (var i = 0; i < length; i++) tiles[i] = GetTile(tileData[i].X, tileData[i].Y);
 
@@ -269,7 +272,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 		}
 	}
 
-	public async void Select(Tile tile) //* CONTROLLER
+	public async void Select(TileView tile) //* CONTROLLER
 	{
 
 		if (_isSwapping || _isMatching || _isShuffling) return;
@@ -305,7 +308,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 		_selection.Clear();
 	}
 
-	private async Task SwapAsync(Tile tile1, Tile tile2) //* CONTROLLER
+	private async Task SwapAsync(TileView tile1, TileView tile2) //* CONTROLLER
 	{
 		_isSwapping = true;
 
@@ -414,7 +417,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 
 	private async void GameOver() //* CONTROLLER/VIEW
 	{
-		_actualState = State.LOSE;
+		_actualState = GameState.LOSE;
 
 		var inflateSequence = DOTween.Sequence();
 
@@ -428,7 +431,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 
 	private async void Win() //* CONTROLLER/VIEW
 	{
-		_actualState = State.WIN;
+		_actualState = GameState.WIN;
 
 		_finalWoodText.text = _woodAmountToTown.ToString();
 		_finalFoodText.text = _foodAmountToTown.ToString();

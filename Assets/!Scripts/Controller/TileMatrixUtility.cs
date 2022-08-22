@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MVC.Model;
 
 public static class TileMatrixUtility //& Board Behaviour Controller
 {
