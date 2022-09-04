@@ -3,7 +3,7 @@ using MVC.Model;
 
 public static class TileMatrixUtility //& Board Behaviour Controller
 {
-	public static void Swap(int x1, int y1, int x2, int y2, TileData[,] tiles)
+	public static void Swap(int x1, int y1, int x2, int y2, TileModel[,] tiles)
 	{
 		var tile1 = tiles[x1, y1];
 
@@ -12,15 +12,15 @@ public static class TileMatrixUtility //& Board Behaviour Controller
 		tiles[x2, y2] = tile1;
 	}
 
-	public static (TileData[], TileData[]) GetConnections(int originX, int originY, TileData[,] tiles)
+	public static (TileModel[], TileModel[]) GetConnections(int originX, int originY, TileModel[,] tiles)
 	{
 		var origin = tiles[originX, originY];
 
 		var width = tiles.GetLength(0);
 		var height = tiles.GetLength(1);
 
-		var horizontalConnections = new List<TileData>();
-		var verticalConnections = new List<TileData>();
+		var horizontalConnections = new List<TileModel>();
+		var verticalConnections = new List<TileModel>();
 
 		for (var x = originX - 1; x >= 0; x--)
 		{
@@ -61,7 +61,7 @@ public static class TileMatrixUtility //& Board Behaviour Controller
 		return (horizontalConnections.ToArray(), verticalConnections.ToArray());
 	}
 
-	public static Match FindBestMatch(TileData[,] tiles)
+	public static Match FindBestMatch(TileModel[,] tiles)
 	{
 		var bestMatch = default(Match);
 
@@ -88,7 +88,7 @@ public static class TileMatrixUtility //& Board Behaviour Controller
 		return bestMatch;
 	}
 
-	public static List<Match> FindAllMatches(TileData[,] tiles)
+	public static List<Match> FindAllMatches(TileModel[,] tiles)
 	{
 		var matches = new List<Match>();
 
@@ -119,9 +119,9 @@ public static class TileMatrixUtility //& Board Behaviour Controller
 		_ => (0, 0),  // origin
 	};
 
-	public static Move FindMove(TileData[,] tiles)
+	public static Move FindMove(TileModel[,] tiles)
 	{
-		var tilesCopy = (TileData[,])tiles.Clone();
+		var tilesCopy = (TileModel[,])tiles.Clone();
 
 		var width = tilesCopy.GetLength(0);
 		var height = tilesCopy.GetLength(1);
@@ -151,9 +151,9 @@ public static class TileMatrixUtility //& Board Behaviour Controller
 		return null;
 	}
 
-	public static Move FindBestMove(TileData[,] tiles)
+	public static Move FindBestMove(TileModel[,] tiles)
 	{
-		var tilesCopy = (TileData[,])tiles.Clone();
+		var tilesCopy = (TileModel[,])tiles.Clone();
 
 		var width = tilesCopy.GetLength(0);
 		var height = tilesCopy.GetLength(1);

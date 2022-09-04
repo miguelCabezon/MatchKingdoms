@@ -8,15 +8,15 @@ public sealed class Match
 
 	public readonly int Score;
 
-	public readonly TileData[] Tiles;
+	public readonly TileModel[] Tiles;
 
-	public Match(TileData origin, TileData[] horizontal, TileData[] vertical)
+	public Match(TileModel origin, TileModel[] horizontal, TileModel[] vertical)
 	{
 		TypeId = origin.TypeId;
 
 		if (horizontal.Length >= 2 && vertical.Length >= 2)
 		{
-			Tiles = new TileData[horizontal.Length + vertical.Length + 1];
+			Tiles = new TileModel[horizontal.Length + vertical.Length + 1];
 
 			Tiles[0] = origin;
 
@@ -29,7 +29,7 @@ public sealed class Match
 		}
 		else if (horizontal.Length >= 2)
 		{
-			Tiles = new TileData[horizontal.Length + 1];
+			Tiles = new TileModel[horizontal.Length + 1];
 
 			Tiles[0] = origin;
 
@@ -39,7 +39,7 @@ public sealed class Match
 		}
 		else if (vertical.Length >= 2)
 		{
-			Tiles = new TileData[vertical.Length + 1];
+			Tiles = new TileModel[vertical.Length + 1];
 
 			Tiles[0] = origin;
 

@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using TMPro;
 using Unity.VisualScripting;
 using MVC.Model;
-using MVC.Controller;
+// using MVC.Controller;
 using MVC.View;
 
 //! DO NO DELETE UNTIL MVC COMPLETION
@@ -57,7 +57,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 
 
 	[SerializeField] private TileType[] _tileTypes;
-	[SerializeField] private Row[] _rows;
+	[SerializeField] private RowView[] _rows;
 
 	#region Audio
 	[SerializeField] private AudioClip _matchSound;
@@ -84,7 +84,7 @@ public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, 
 	public event Action OnWinAction;
 	public event Action OnLoseAction;
 
-	public BoardController boardController = new BoardController();
+	// public BoardController boardController = new BoardController();
 
 	private TileModel[,] Matrix // Matrix filled with tile info //* CONTROLLER/MODEL
 	{
