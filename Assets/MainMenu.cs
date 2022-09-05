@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame() 
     {
+        Debug.Log("play!");
         StartCoroutine(SceneController.Instance.ChangeScene(this.gameObject, _gameScreen));
     }
 
