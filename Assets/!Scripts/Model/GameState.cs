@@ -6,6 +6,9 @@ namespace MVC.Model
         GAME,
         WIN,
         LOSE,
+        GAMEHUB,
+        MAINMENU,
+        SHOP,
         NONE
         /*
         * ADD GAMEMATCH (MAYBE ONE FOR EACH MATCH)
