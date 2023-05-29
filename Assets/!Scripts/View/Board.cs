@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 using TMPro;
 using Unity.VisualScripting;
 using MVC.Model;
-// using MVC.Controller;
 using MVC.View;
+// using MVC.Controller;
 
 //! DO NO DELETE UNTIL MVC COMPLETION
 public class Board : MonoBehaviour //& WORKING BOARD SCRIPT (it contains model, view, and controller)  
